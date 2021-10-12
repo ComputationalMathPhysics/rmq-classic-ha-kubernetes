@@ -1,9 +1,13 @@
 # RabbitMQ on Kubernetes
 
 ## Motivation
-```
-Read https://www.rabbitmq.com/clustering.html
-```
+
+# Clustering
+https://www.rabbitmq.com/clustering.html
+
+# Cluster Operator for Kubernetes
+https://www.rabbitmq.com/kubernetes/operator/operator-overview.html
+
 
 ## Notes 
 
