@@ -9,7 +9,9 @@ How CLI Tools Authenticate to Nodes (and Nodes to Each Other): the Erlang Cookie
 RabbitMQ nodes and CLI tools (e.g. rabbitmqctl) use a cookie to determine whether they are allowed to communicate with each other. For two nodes to be able to communicate they must have the same shared secret called the Erlang cookie. The cookie is just a string of alphanumeric characters up to 255 characters in size. It is usually stored in a local file. The file must be only accessible to the owner (e.g. have UNIX permissions of 600 or similar). Every cluster node must have the same cookie.
 
 # how to grab existing erlang cookie
+```
 docker exec -it rabbit-1 cat /var/lib/rabbitmq/.erlang.cookie
+```
 
 # roles based security 
 Pods needs access to the api server. RBAC is a method of regulating access to computer or network resources based on the roles of individual users. RBAC authorization uses the rbac.authorization.k8s.io API group to drive authorization decisions, allowing you to dynamically configure policies through the Kubernetes API. To enable RBAC, start the API server with the --authorization-mode flag set to a comma-separated list that includes RBAC; for example:
@@ -43,6 +45,7 @@ persistent volumes
 create writable mount pouints for rmq. see lines 19 thru 28. busybox container.
 
 # headless service. every pod gets a fqdn
+```
 apiVersion: v1
 kind: Servicej
 metadata:
@@ -58,6 +61,7 @@ spec:
     name: amqp
   selector:
     app: rabbitmq
+```
 
 # port forward so that http://localhost:8080
 kubectl -n rabbits port-forward rabbitmq-0 8080:5672 guest/guest
