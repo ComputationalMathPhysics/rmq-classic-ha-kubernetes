@@ -40,9 +40,17 @@ in yaml, create ServiceAccount, create Role, create RoleBinding
 ## service discovery 
 for service discovery I am using 3 plugins
 1) rabbitmq_federation - federate and synchronize queues and messages across instances
+```
+comes with rmq
+```
 2) rabbitmq_management - user interface and dashboard
+```
+comes with rmq
+```
 3) rabbitmq_peer_discovery_k8s - peer discovery for kubernetes
-
+```
+rabbitmq-plugins --offline enable rabbitmq_peer_discovery_k8s
+```
 ## plugins
 ```
 cluster_formation.peer_discovery_backend  = rabbit_peer_discovery_k8s # use peer discovery plugin
