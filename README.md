@@ -1,16 +1,6 @@
-# rmq-classic-ha-kubernetes
-rmq on kubernetes
-
-
 # RabbitMQ on Kubernetes
 
-Create a cluster with [kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
-
-```
-kind create cluster --name rabbit --image kindest/node:v1.18.4
-```
-
-## Namespace
+## Namespace - optional step
 
 ```
 kubectl create ns rabbits
@@ -24,7 +14,7 @@ NAME                 PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE  
 standard (default)   rancher.io/local-path   Delete          WaitForFirstConsumer   false                  84s
 ```
 
-## Deployment
+## Deployment - uses namespace created from step 1
 
 ```
 kubectl apply -n rabbits -f .\kubernetes\rabbit-rbac.yaml
@@ -33,7 +23,7 @@ kubectl apply -n rabbits -f .\kubernetes\rabbit-secret.yaml
 kubectl apply -n rabbits -f .\kubernetes\rabbit-statefulset.yaml
 ```
 
-## Access the UI
+## Access the UI - uses namespace created from step 1
 
 ```
 kubectl -n rabbits port-forward rabbitmq-0 8080:15672
@@ -41,16 +31,6 @@ kubectl -n rabbits port-forward rabbitmq-0 8080:15672
 Go to htttp://localhost:8080 <br/>
 Username: `guest` <br/>
 Password: `guest` <br/>
-
-# Message Publisher
-
-```
-
-cd messaging\rabbitmq\applications\publisher
-docker build . -t aimvector/rabbitmq-publisher:v1.0.0
-
-kubectl apply -f rabbits deployment.yaml
-```
 
 # Automatic Synchronization
 
