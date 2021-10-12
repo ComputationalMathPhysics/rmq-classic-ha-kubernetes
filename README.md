@@ -3,9 +3,12 @@
 ## Notes 
 
 What is Replicated?
-All data/state required for the operation of a RabbitMQ broker is replicated across all nodes. An exception to this are message queues, which by default reside on one node, though they are visible and reachable from all nodes. To replicate queues across nodes in a cluster, use a queue type that supports replication. This topic is covered in the Quorum Queues guide.
+All data/state required for the operation of a RabbitMQ broker is replicated across all nodes except the message queues, which by default reside on one node, though they are visible and reachable from all nodes. 
+There aare 2 ways to replicate queues across nodes in a cluster
+(1) classic mirroring - this example uses classic mirroring
+(2) quorum queues
 
-How CLI Tools Authenticate to Nodes (and Nodes to Each Other): the Erlang Cookie
+# Nodes to Nodes authentication : the Erlang Cookie
 RabbitMQ nodes and CLI tools (e.g. rabbitmqctl) use a cookie to determine whether they are allowed to communicate with each other. For two nodes to be able to communicate they must have the same shared secret called the Erlang cookie. The cookie is just a string of alphanumeric characters up to 255 characters in size. It is usually stored in a local file. The file must be only accessible to the owner (e.g. have UNIX permissions of 600 or similar). Every cluster node must have the same cookie.
 
 # how to grab existing erlang cookie
