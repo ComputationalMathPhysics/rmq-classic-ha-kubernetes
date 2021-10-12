@@ -15,30 +15,28 @@ Also added
 persistent volumes 
 k8 statefulsets
 
-roles based security (RBAC) is a method of regulating access to computer or network resources based on the roles of individual users within your organization.
-RBAC authorization uses the rbac.authorization.k8s.io API group to drive authorization decisions, allowing you to dynamically configure policies through the Kubernetes API.
-
-To enable RBAC, start the API server with the --authorization-mode flag set to a comma-separated list that includes RBAC; for example:
+# roles based security (RBAC) 
+Pods needs access to the api server. RBAC is a method of regulating access to computer or network resources based on the roles of individual users. RBAC authorization uses the rbac.authorization.k8s.io API group to drive authorization decisions, allowing you to dynamically configure policies through the Kubernetes API. To enable RBAC, start the API server with the --authorization-mode flag set to a comma-separated list that includes RBAC; for example:
 https://kubernetes.io/docs/reference/access-authn-authz/rbac/
 
 ServiceAccount
 https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 
-Create ServiceAccount
-Create Role
-Create RoleBinding
+in yaml, create ServiceAccount, create Role, create RoleBinding
 
+# service discovery 
 for service discovery I am using 3 plugins
 1) rabbitmq_federation - federate and synchronize queues and messages across instances
 2) rabbitmq_management - user interface and dashboard
 3) rabbitmq_peer_discovery_k8s - peer discovery for kubernetes
 
+# plugins
 cluster_formation.peer_discovery_backend  = rabbit_peer_discovery_k8s # use peer discovery plugin
 cluster_formation.k8s.host = kubernetes.default.svc.cluster.local     # location of api server
 cluster_formation.k8s.address_type = hostname # hostname or ip
 cluster_formation.node_cleanup.only_log_warning = true
 
-statefulset
+# statefulset
 every pod gets their own persistence volume and storage class
 specify the accoutn name that the pods can use to communicate with the api server
 
@@ -79,22 +77,8 @@ spec:
 # port forward so that http://localhost:8080
 kubectl -n rabbits port-forward rabbitmq-0 8080:5672 guest/guest
 
-Mirroring
+# mirroring
 https://www.rabbitmq.com/ha.html#ways-to-configure
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ## Namespace - optional step
