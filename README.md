@@ -1,5 +1,10 @@
 # RabbitMQ on Kubernetes
 
+## Motivation
+```
+Read https://www.rabbitmq.com/clustering.html
+```
+
 ## Notes 
 
 What is Replicated?
