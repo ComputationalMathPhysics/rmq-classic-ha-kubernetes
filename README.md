@@ -11,11 +11,7 @@ RabbitMQ nodes and CLI tools (e.g. rabbitmqctl) use a cookie to determine whethe
 # how to grab existing erlang cookie
 docker exec -it rabbit-1 cat /var/lib/rabbitmq/.erlang.cookie
 
-Also added
-persistent volumes 
-k8 statefulsets
-
-# roles based security (RBAC) 
+# roles based security 
 Pods needs access to the api server. RBAC is a method of regulating access to computer or network resources based on the roles of individual users. RBAC authorization uses the rbac.authorization.k8s.io API group to drive authorization decisions, allowing you to dynamically configure policies through the Kubernetes API. To enable RBAC, start the API server with the --authorization-mode flag set to a comma-separated list that includes RBAC; for example:
 https://kubernetes.io/docs/reference/access-authn-authz/rbac/
 
@@ -31,33 +27,22 @@ for service discovery I am using 3 plugins
 3) rabbitmq_peer_discovery_k8s - peer discovery for kubernetes
 
 # plugins
+```
 cluster_formation.peer_discovery_backend  = rabbit_peer_discovery_k8s # use peer discovery plugin
 cluster_formation.k8s.host = kubernetes.default.svc.cluster.local     # location of api server
 cluster_formation.k8s.address_type = hostname # hostname or ip
 cluster_formation.node_cleanup.only_log_warning = true
+```
 
 # statefulset
 every pod gets their own persistence volume and storage class
 specify the accoutn name that the pods can use to communicate with the api server
+persistent volumes 
 
 # hack
-create writable mount pouints for rmq
+create writable mount pouints for rmq. see lines 19 thru 28. busybox container.
 
-   initContainers:
-      - name: config
-        image: busybox
-        command: ['/bin/sh', '-c', 'cp /tmp/config/rabbitmq.conf /config/rabbitmq.conf && ls -l /config/ && cp /tmp/config/enabled_plugins /etc/rabbitmq/enabled_plugins']
-        volumeMounts:
-        - name: config
-          mountPath: /tmp/config/
-          readOnly: false
-        - name: config-file
-          mountPath: /config/
-        - name: plugins-file
-          mountPath: /etc/rabbitmq/
-
-
-# headless service 9every pod gets a fqdn
+# headless service. every pod gets a fqdn
 apiVersion: v1
 kind: Servicej
 metadata:
