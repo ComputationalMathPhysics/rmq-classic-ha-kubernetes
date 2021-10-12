@@ -47,7 +47,7 @@ create writable mount pouints for rmq. see lines 19 thru 28. busybox container.
 # headless service. every pod gets a fqdn
 ```
 apiVersion: v1
-kind: Servicej
+kind: Service
 metadata:
   name: rabbitmq
 spec:
@@ -64,7 +64,9 @@ spec:
 ```
 
 # port forward so that http://localhost:8080
+```
 kubectl -n rabbits port-forward rabbitmq-0 8080:5672 guest/guest
+```
 
 # mirroring
 https://www.rabbitmq.com/ha.html#ways-to-configure
@@ -97,10 +99,11 @@ kubectl apply -n rabbits -f .\kubernetes\rabbit-statefulset.yaml
 
 ```
 kubectl -n rabbits port-forward rabbitmq-0 8080:15672
-```
+
 Go to htttp://localhost:8080 <br/>
 Username: `guest` <br/>
 Password: `guest` <br/>
+```
 
 # Automatic Synchronization
 
