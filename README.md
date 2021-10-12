@@ -5,7 +5,7 @@
 What is Replicated?
 All data/state required for the operation of a RabbitMQ broker is replicated across all nodes except the message queues, which by default reside on one node, though they are visible and reachable from all nodes. 
 There aare 2 ways to replicate queues across nodes in a cluster
-(1) classic mirroring - this example uses classic mirroring
+(1) classic queue mirroring - this example uses classic queue mirroring
 (2) quorum queues
 
 # Nodes to Nodes authentication : the Erlang Cookie
