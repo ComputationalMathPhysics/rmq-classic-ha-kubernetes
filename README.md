@@ -6,7 +6,7 @@
 https://www.rabbitmq.com/clustering.html
 
 ## Cluster Operator for Kubernetes
-https://www.rabbitmq.com/kubernetes/operator/operator-overview.html
+https://www.rabbitmq.com/kubernetes/operator/operator-overview.html  
 
 ## Deploying RabbitMQ to Kubernetes: What's involved?
 https://blog.rabbitmq.com/posts/2020/08/deploying-rabbitmq-to-kubernetes-whats-involved/  
